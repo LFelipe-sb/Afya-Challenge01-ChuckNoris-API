@@ -2,7 +2,7 @@
 //errors
 import Error404 from './errors/Error404';
 
-//Home
+//import
 import Home from './home/Home';
 
 // exportar
