@@ -1,17 +1,36 @@
-import { api } from '../../../service/api';
+import { chuckNorrisapi, pokemonApi } from '../../../service/api';
 import afyaLogo from '../../../assets/img/Afya.gif';
 import picture01 from '../../../assets/img/medicos.png';
 import picture02 from '../../../assets/img/equipe-afya.jpg';
 import picture03 from '../../../assets/img/business.jpg';
 
 const getJokesRandom = async () => {
-  const request = await api.get('random');
+  const request = await chuckNorrisapi.get('random');
   return request.data;
 };
 
 const getJokesCategory = async () => {
-  const request = await api.get('categories');
+  const request = await chuckNorrisapi.get('categories');
   return request.data;
+};
+
+const getSomePokemons = async () => {
+  let pokemons;
+  const dataPokemons  = []; 
+  for(let i = 1; dataPokemons.length < 20; i++ ) {
+    dataPokemons.push(await pokemonApi.get(`pokemon/${i}`));
+  }
+  pokemons = dataPokemons.map(({data}) => {
+    return {
+      "name"   : data.name,
+      "type"   : data.types[0].type.name,
+      "imageFront"  : data.sprites.front_default,
+      "imageBack"  : data.sprites.back_default,
+      "height" : data.height,
+      "weight" : data.weight,
+    }
+  });
+  return pokemons;
 };
 
 let renderPage = {
@@ -20,6 +39,7 @@ let renderPage = {
   render: async () => {
     const jokes = await getJokesRandom();
     const categories = await getJokesCategory();
+    const pokemonsFiltered = await getSomePokemons();
 
     let home = 
       `
@@ -38,7 +58,7 @@ let renderPage = {
       </header>
       <div>
         <main>
-          <section class="home active container hidden">
+          <section class="home active container">
             <h1>Bem Vindos</h1>
             <p>Este é um dos mini projeto desenvolvido durante as aulas de um super projeto entre a <strong>Afya</strong> e a <strong>Gama-Academy</strong>, chamado de <strong>Afya-Labs.</strong></p>
             <p>Iniciado durante a primeira aula ao vivo com o professor Douglas, ele propos que continuassemos o projeto e publicassemos no GitHub e na Vercel.</p>
@@ -111,18 +131,48 @@ let renderPage = {
             </div>
           </section>
 
-          <section class="pokemon">
-            <h1>Pokemon</h1>      
+          <section class="pokemon container hidden">
+            <h1>Pokemon</h1>
+
+            <h2>Mas o que é a API do Chuck Norris?</h2>
+            <p>O PokéAPI é gratuito e aberto para uso. Também é muito popular. Por isso, pedimos a todos os desenvolvedores que obedeçam à nossa política de uso justo. Pessoas que não cumprirem a política de uso justo terão seus endereços IP banidos permanentemente.</p>
+            <p>O PokéAPI é principalmente uma ferramenta educacional e não toleraremos ataques de negação de serviço que impeçam as pessoas de aprender.</p>
+
+            <h2>Regras:</h2>
+            <p>Armazenar recursos em cache localmente sempre que você os solicitar.</p>
+            <p>Seja legal e amigável com seus colegas desenvolvedores de PokéAPI.</p>
+            <table>
+              <tr>
+                <th>Nome Pokemon</th> 
+                <th>Tipo</th> 
+                <th>Altura</th> 
+                <th>Peso</th> 
+                <th>Imagem</th>
+              </tr>     
+              ${pokemonsFiltered.map(({name, type, imageFront, imageBack, height, weight}, index) =>
+                `<tr>
+                  <td>${name}</td>
+                  <td>${type}</td>
+                  <td>${height}</td>
+                  <td>${weight}</td>
+                  <td>
+                    <img src="${imageFront}" alt="Imagem do Pokemon ${name}" title="Imagem do Pokemon ${name}">
+                    <img src="${imageBack}" alt="Imagem do Pokemon ${name}" title="Imagem do Pokemon ${name}"></td>
+                  </td>
+              `)
+              .join('')}  
+            </table>
           </section>
 
           <section class="star_wars hidden">
             <h1>Star Wars</h1>
+            <h2>Em breve! Construção...</h2>
           </section>
         </main>
-        <footer class="bottom">
-            &copy; Afya | Gama Academy - Afya Labs - Por Luís Felipe dos Santos
-        </footer>
       </div>
+      <footer class="bottom">
+        &copy; Afya | Gama Academy - Afya Labs - Por Luís Felipe dos Santos
+      </footer>
     `;
 
     setTimeout(() => {
@@ -138,6 +188,7 @@ let renderPage = {
     }, 0);
     
     function changeContent(e) {
+      document.querySelector('footer').classList.remove('bottom')
       document.querySelectorAll('section').forEach(item => {
         item.classList.add('hidden');
       });

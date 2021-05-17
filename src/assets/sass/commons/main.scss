@@ -5,9 +5,9 @@
   list-style: none;
 
   body{
-    background: linear-gradient(45deg, #073969, #708070, #DC8C7A, #FBC490);
-    animation: bgaction 8s ease infinite;
-    background-size: 200% 200%;
+    background: linear-gradient(45deg, #073988, #708070, #DC8C7A, #FBC490);
+    animation: bgaction 15s ease infinite;
+    background-size: 700% 700%;
     height: 100vh;
     line-height: 20px;
     font-size: 16px;
@@ -80,7 +80,7 @@
           margin: 0 auto;
           text-align: center;
         }
-      }      
+      }
 
       & .galery{
         background-color: #000;
@@ -125,6 +125,20 @@
       }
     }
 
+    & section.pokemon table{
+      width: 80%;
+      margin: 15px auto;
+      text-align: center;
+      font-size: 16px;
+      padding-bottom: 15px;
+      text-transform: capitalize;
+
+      & th, td{
+        border: 1px solid black;
+        padding: 5px;
+      }
+    }
+
     & .container{
       width: 80%;
       margin: 0 auto;
@@ -152,6 +166,7 @@
       padding: 30px 0;
       text-align: center;      
       width: 100%;
+      margin-top: 10px;
     }
 
     & .bottom{
