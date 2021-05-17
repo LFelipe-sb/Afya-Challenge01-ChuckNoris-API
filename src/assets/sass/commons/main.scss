@@ -104,6 +104,27 @@
       }
     }
 
+    & .chuck_norris{
+      display: flex;
+      flex-direction: column;
+
+      & .menu_list .categories{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      
+        & .chuck_facts{
+          width: 30%;
+        }
+
+      }
+
+      & .topics{
+        list-style: square;
+        text-transform: capitalize;
+      }
+    }
+
     & .container{
       width: 80%;
       margin: 0 auto;

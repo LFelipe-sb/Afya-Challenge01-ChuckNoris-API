@@ -87,6 +87,22 @@
 * body main .galery .photos ul img {
   width: 100%;
 }
+* body .chuck_norris {
+  display: flex;
+  flex-direction: column;
+}
+* body .chuck_norris .menu_list .categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+* body .chuck_norris .menu_list .categories .chuck_facts {
+  width: 30%;
+}
+* body .chuck_norris .topics {
+  list-style: square;
+  text-transform: capitalize;
+}
 * body .container {
   width: 80%;
   margin: 0 auto;

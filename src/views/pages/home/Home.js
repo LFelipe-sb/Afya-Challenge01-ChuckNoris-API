@@ -38,7 +38,7 @@ let renderPage = {
       </header>
       <div>
         <main>
-          <section class="home active container">
+          <section class="home active container hidden">
             <h1>Bem Vindos</h1>
             <p>Este é um dos mini projeto desenvolvido durante as aulas de um super projeto entre a <strong>Afya</strong> e a <strong>Gama-Academy</strong>, chamado de <strong>Afya-Labs.</strong></p>
             <p>Iniciado durante a primeira aula ao vivo com o professor Douglas, ele propos que continuassemos o projeto e publicassemos no GitHub e na Vercel.</p>
@@ -68,36 +68,50 @@ let renderPage = {
                 <div class="photos">
                   <ul>
                     <li>
-                      <img src="${picture01}" alt="" title="">
+                      <img src="${picture01}" alt="Dois medicos conversando em um consultórios odontologico" title="Consultorios parceiros">
                     </li>
                     <li>
-                      <img src="${picture02}" alt="" title="">
+                      <img src="${picture02}" alt="Equipe de profissionais reunidos atrás de uma bancada em um evento chamado Nasdeq" title="Equipe  motivada">
                     </li>
                     <li>
-                      <img src="${picture03}" alt="" title="">
+                      <img src="${picture03}" alt="Dois homens sorrindo e comprimentando-se com um apertando de mãos" title="Comprometimento">
                     </li>
                   </ul>
                 </div>
               <div>
             </div>
           </section>
+
           <section class="chuck_norris hidden">
-            <h1>Home:</h1>
-            <ul class="menu-list">
-              ${categories
-                .map(
-                  (category, index) =>
-                    `<li class="menu-item" key=${index}>${category}</li>`
-                )
-                .join('')}
-            </ul>
-            <br>
-            <img src=${jokes.icon_url}>
-            <h2>Chuck Norris fact:</h2>
-            <p>— "${jokes.value}"</p>
+          <h1>Página consumindo API do Chuck Norris</h1>
+            <div class="menu_list container">
+              <h2>Mas o que é a API do Chuck Norris?</h2>
+              <p><strong>chucknorris.io</strong> é uma API JSON gratuita para fatos de Chuck Norris.</p>
+
+              <p>Os fatos de Chuck Norris são factóides satíricos sobre o artista marcial e ator Chuck Norris que se tornaram um fenômeno da Internet e, como resultado, se espalharam pela cultura popular. Os "fatos" são normalmente afirmações hiperbólicas absurdas sobre a dureza, atitude, virilidade, sofisticação e masculinidade de Norris.</p>
+
+              <p>Os fatos de Chuck Norris se espalharam pelo mundo, levando não apenas a versões traduzidas, mas também gerando versões localizadas que mencionam anúncios específicos de países e outros fenômenos da Internet. Às vezes, também são feitas alusões ao uso de chutes circulares para realizar aparentemente qualquer tarefa, sua grande quantidade de pelos corporais com relação específica à sua barba e seu papel na série de televisão de ação Walker, Texas Ranger.</p>
+              <br>
+              <p>Veja a lista de alguns temas que você pode encontrar aqui:</p>
+              <div class="categories">
+                <ul>  
+                  ${categories
+                    .map(
+                      (category, index) =>
+                        `<li class="topics" key=${index}>${category}</li>`
+                    )
+                    .join('')}
+                </ul>
+                <div class="chuck_facts">
+                  <img src=${jokes.icon_url}>
+                  <h2>Alguns fatos sobre Chuck Norris:</h2>
+                  <blockquote>— "${jokes.value}"</blockquote>
+                </div>
+              </div>
+            </div>
           </section>
 
-          <section class="pokemon hidden">
+          <section class="pokemon">
             <h1>Pokemon</h1>      
           </section>
 
